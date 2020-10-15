@@ -8,4 +8,4 @@ metadata:
     apps.open-clustermanagement.io/webhook-secret: webhooksecret
 spec:
   type: GitHub
-  pathname: https://github.com/redhat-nfvpe/flexran-manifests.git
+  pathname: https://github.com/ch-stark/flexran-manifests.git
