@@ -8,6 +8,8 @@ kind: Subscription
 metadata:
   name: flexran-nfd
   namespace: openshift-nfd
+  labels:
+    app: flexran-nfd
   annotations:
     apps.open-cluster-management.io/github-path: cluster_configuration/sites/sample_site/nfd
     apps.open-cluster-management.io/reconcile-option: merge
@@ -19,3 +21,5 @@ spec:
       kind: PlacementRule
       name: apply-nfd-to-ready-clusters
       apiGroup: apps.open-cluster-management.io
+      
+      
