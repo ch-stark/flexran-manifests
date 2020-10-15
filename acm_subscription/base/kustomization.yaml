@@ -12,4 +12,6 @@ resources:
 - subscription/sub_performance_profile.yaml
 - subscription/sub_multus.yaml
 - policy/cluster_upgrade_policy.yaml
-
+- policy/deployment_policy.yaml
+- policy/etcd-encryption.yaml
+- policy/namespace-policy.yaml
