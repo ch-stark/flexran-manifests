@@ -8,6 +8,8 @@ kind: Subscription
 metadata:
   name: flexran-multus-networks
   namespace: multus-networks
+  labels:
+    app: flexran-multus-networks
   annotations:
     apps.open-cluster-management.io/github-path: cluster_configuration/sites/sample_site/multus
     apps.open-cluster-management.io/reconcile-option: merge
