@@ -22,6 +22,8 @@ for example you can run:
 
 ```
 oc apply -k sample_site/
+
+
 namespace/cluster-configuration created
 namespace/flexran-workloads created
 namespace/multus-networks created
