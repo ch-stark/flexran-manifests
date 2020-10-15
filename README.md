@@ -21,8 +21,27 @@ oc apply -k cluster_configuration/path/to/site/
 for example you can run:
 
 ```
-cd flexran-manifests
-oc apply -k /redhat-nfvpe/flexran-manifests/tree/master/multicluster/placement/sites/sample_site
+oc apply -k sample_site/
+namespace/cluster-configuration created
+namespace/flexran-workloads created
+namespace/multus-networks created
+namespace/openshift-nfd created
+namespace/openshift-performance-addon created
+channel.apps.open-cluster-management.io/acm-gitops-github created
+placementrule.apps.open-cluster-management.io/cluster-configuration-rule created
+placementrule.apps.open-cluster-management.io/cvo-rule created
+placementrule.apps.open-cluster-management.io/placement-upgrade-cluster created
+placementrule.apps.open-cluster-management.io/apply-multus-to-ready-clusters created
+placementrule.apps.open-cluster-management.io/apply-nfd-to-ready-clusters created
+placementrule.apps.open-cluster-management.io/apply-performance-to-ready-clusters created
+subscription.apps.open-cluster-management.io/flexran-multus-networks created
+subscription.apps.open-cluster-management.io/flexran-nfd created
+subscription.apps.open-cluster-management.io/flexran-performance created
+placementbinding.policy.open-cluster-management.io/cluster-configuration-policy created
+placementbinding.policy.open-cluster-management.io/cvo-policy created
+placementbinding.policy.open-cluster-management.io/binding-upgrade-cluster created
+policy.policy.open-cluster-management.io/upgrade-cluster created
+
 ```
 
 ### Prerequisites
