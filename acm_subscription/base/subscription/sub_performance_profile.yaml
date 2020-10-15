@@ -5,7 +5,7 @@ metadata:
   name: flexran-performance
   namespace: flexran-workloads
   labels:
-    app: flexran-applications
+    app: flexran-application
   annotations:
     apps.open-cluster-management.io/github-path: cluster_configuration/sites/sample_site/performance_profile/
     apps.open-cluster-management.io/reconcile-option: merge
