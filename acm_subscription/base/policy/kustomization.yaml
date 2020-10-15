@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
 - cluster_configuration_policy.yaml
 - cluster_upgrade_policy.yaml
+- policy-namespace
