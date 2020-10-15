@@ -8,6 +8,8 @@ kind: Subscription
 metadata:
   name: flexran-performance
   namespace: openshift-performance-addon
+  labels:
+    app: flexran-performance
   annotations:
     apps.open-cluster-management.io/github-path: cluster_configuration/sites/sample_site/performance_profile/
     apps.open-cluster-management.io/reconcile-option: merge
