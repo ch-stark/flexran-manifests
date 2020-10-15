@@ -2,7 +2,9 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: Subscription
 metadata:
   name: flexran-nfd
-  namespace: openshift-nfd
+  namespace: flexran-workloads
+  labels:
+    app: flexran-application
   annotations:
     apps.open-cluster-management.io/github-path: cluster_configuration/sites/sample_site/nfd
 spec:
