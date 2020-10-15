@@ -25,5 +25,8 @@ metadata:
   namespace: cluster-configuration
 spec:
   clusterConditions:
-    - type: "ManagedClusterConditionAvailable"
-      status: "True"
+  - status: "True"
+    type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchExpressions:
+      - {key: environment, operator: In, values: ["dev"]}
