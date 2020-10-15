@@ -1,0 +1,126 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: policy-scale-machineset
+  namespace: default
+  annotations:
+    policy.open-cluster-management.io/standards: NIST-CSF
+    policy.open-cluster-management.io/categories: PR.IP Information Protection Processes and Procedures
+    policy.open-cluster-management.io/controls: PR.IP-1 Baseline Configuration
+spec:
+  remediationAction: inform
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: policy-scale-machineset-prod
+        spec:
+          remediationAction: inform # will be overridden by remediationAction in parent policy
+          severity: low
+          namespaceSelector:
+            exclude: ["kube-*"]
+            include: ["default"]
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: machine.openshift.io/v1beta1
+                kind: MachineSet
+                metadata:
+                  annotations:
+                    machine.openshift.io/GPU: "0"
+                    machine.openshift.io/memoryMb: "16384"
+                    machine.openshift.io/vCPU: "4"
+                  labels:
+                    machine.openshift.io/cluster-api-cluster: acmdemo-785g4
+                spec:
+                  replicas: 1
+                  selector:
+                    matchLabels:
+                      machine.openshift.io/cluster-api-cluster: acmdemo-785g4
+                      machine.openshift.io/cluster-api-machineset: acmdemo-785g4-worker-eu-central-1a
+                  template:
+                    metadata:
+                      labels:
+                        machine.openshift.io/cluster-api-cluster: acmdemo-785g4
+                        machine.openshift.io/cluster-api-machine-role: worker
+                        machine.openshift.io/cluster-api-machine-type: worker
+                        machine.openshift.io/cluster-api-machineset: acmdemo-785g4-worker-eu-central-1a
+                    spec:
+                      metadata: {}
+                      providerSpec:
+                        value:
+                          ami:
+                            id: ami-099fd2cef9baee606
+                          apiVersion: awsproviderconfig.openshift.io/v1beta1
+                          blockDevices:
+                          - ebs:
+                              encrypted: true
+                              iops: 0
+                              kmsKey:
+                                arn: ""
+                              volumeSize: 120
+                              volumeType: gp2
+                          credentialsSecret:
+                            name: aws-cloud-credentials
+                          deviceIndex: 0
+                          iamInstanceProfile:
+                            id: acmdemo-785g4-worker-profile
+                          instanceType: m5.xlarge
+                          kind: AWSMachineProviderConfig
+                          metadata:
+                            creationTimestamp: null
+                          placement:
+                            availabilityZone: eu-central-1a
+                            region: eu-central-1
+                          securityGroups:
+                          - filters:
+                            - name: tag:Name
+                              values:
+                              - acmdemo-785g4-worker-sg
+                          spotMarketOptions:
+                            maxPrice: 0.51
+                          subnet:
+                            filters:
+                            - name: tag:Name
+                              values:
+                              - acmdemo-785g4-private-eu-central-1a
+                          tags:
+                          - name: kubernetes.io/cluster/acmdemo-785g4
+                            value: owned
+                          userDataSecret:
+                            name: worker-user-data
+                status:
+                  availableReplicas: 1
+                  fullyLabeledReplicas: 1
+                  observedGeneration: 7
+                  readyReplicas: 1
+                  replicas: 1
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: binding-policy-scale-machineset
+  namespace: default
+placementRef:
+  name: placement-policy-scale-machineset
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+- name: policy-scale-machineset
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: placement-policy-scale-machineset
+  namespace: default
+spec:
+  clusterConditions:
+  - status: "True"
+    type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchExpressions:
+      []  # selects all clusters if not specified
