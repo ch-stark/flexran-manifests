@@ -4,7 +4,7 @@ metadata:
   name: flexran-nfd
   namespace: flexran-workloads
   labels:
-    app: flexran-applications
+    app: flexran-application
   annotations:
     apps.open-cluster-management.io/github-path: cluster_configuration/sites/sample_site/nfd
     apps.open-cluster-management.io/reconcile-option: merge
