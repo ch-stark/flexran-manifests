@@ -2,7 +2,7 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
   name: apply-performance-to-ready-clusters
-  namespace: openshift-performance-addon
+  namespace: flexran-workloads
 spec:
   clusterConditions:
   - status: "True"
