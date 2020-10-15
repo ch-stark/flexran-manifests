@@ -14,5 +14,5 @@ spec:
       operator: In
       values:
       - flexran-performance
-      - flexran-multus
+      - flexran-multus-networks
       - flexran-nfd
