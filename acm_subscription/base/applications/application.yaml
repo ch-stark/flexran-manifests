@@ -1,17 +1,17 @@
 apiVersion: app.k8s.io/v1beta1
 kind: Application
 metadata:
-  name: flexran
+  name: flexran-application
+  namespace: flexran-workloads
 spec:
   componentKinds:
-  - group: apps.open-cluster-management.io
-    kind: Subscription
+    - group: apps.open-cluster-management.io
+      kind: Subscription
   descriptor: {}
   selector:
     matchExpressions:
-    - key: app
-      operator: In
-      values:
-      - flexran-performance
-      - flexran-multus-networks
-      - flexran-nfd
+      - key: app
+        operator: In
+        values:
+          - flexran-application
+
